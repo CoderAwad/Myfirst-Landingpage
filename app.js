@@ -41,11 +41,15 @@ function highlight() {
     section.classList.remove("your-active-class");
 
     const section_Top = section.getBoundingClientRect().top;
+    const maxTop = 250;
+    const activelink = document.querySelector(`a[href="#${section.id}"]`);
 
-    if (section_Top > 0 && section_Top <= 150) {
+    if (section_Top > 0 && section_Top <= maxTop) {
       section.classList.add("your-active-class");
+      activelink.classList.add("menu-link");
     } else {
       section.classList.remove("your-active-class");
+      activelink.classList.remove("menu-link");
     }
   });
 }
