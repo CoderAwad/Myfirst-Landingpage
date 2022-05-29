@@ -11,16 +11,6 @@ for (let i = 1; i <= allnav.length; i++) {
   const anchor = '<a href="#section' + i + '"> section ' + i + "<a>";
   newLi.innerHTML = anchor;
   menu.appendChild(newLi);
-  //newLi.classList.add("nav-item");
-
-  // now I will use this function to smooth the scrolling
-  /**
- * newLi.addEventListener("click", function (e) {
-    e.preventDefault();
-    allnav[i - 1].scrollIntoView({ behavior: "smooth" });
-  });
- * 
- */
 }
 
 // function to control scroll behavior
@@ -28,18 +18,18 @@ for (let i = 1; i <= allnav.length; i++) {
 const link_items = document.querySelectorAll("a");
 
 link_items.forEach((link) => {
-  const current_sec = document.querySelector(link.getAttribute("href"));
-  console.log(current_sec);
   link.addEventListener("click", function (e) {
+    e.preventDefault();
+    const current_sec = document.querySelector(e.target.getAttribute("href"));
     const section_top = current_sec.offsetTop;
     console.log(section_top);
     const myUl = document.querySelector("#navbar__list");
     const menuHeight = myUl.getBoundingClientRect().height;
     e.preventDefault();
     if (window.innerWidth <= 600) {
-      window.scrollTo({ top: current_sec - menuHeight, behavior: "smooth" });
+      window.scrollTo({ top: section_top - menuHeight, behavior: "smooth" });
     } else {
-      link.scrollIntoView({ behavior: "smooth" });
+      current_sec.scrollIntoView({ behavior: "smooth" });
     }
   });
 });
@@ -65,7 +55,7 @@ function highlight() {
     section.classList.remove("your-active-class");
 
     const section_Top = section.getBoundingClientRect().top;
-    const maxTop = 250;
+    const maxTop = 500;
     const activelink = document.querySelector(`a[href="#${section.id}"]`);
 
     if (section_Top > 0 && section_Top <= maxTop) {
