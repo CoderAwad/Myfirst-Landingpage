@@ -150,12 +150,13 @@ a {
     align-items: center;
     
     
+    
   }
 }
 
 @media only screen and (max-width: 600px) {
   section .landing__container {
-    display: flexbox;
+    display: flex;
     flex-wrap: wrap;
     flex-direction: column;
     width: auto;
