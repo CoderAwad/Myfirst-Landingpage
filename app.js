@@ -11,14 +11,38 @@ for (let i = 1; i <= allnav.length; i++) {
   const anchor = '<a href="#section' + i + '"> section ' + i + "<a>";
   newLi.innerHTML = anchor;
   menu.appendChild(newLi);
+  //newLi.classList.add("nav-item");
 
   // now I will use this function to smooth the scrolling
-
-  newLi.addEventListener("click", function (e) {
+  /**
+ * newLi.addEventListener("click", function (e) {
     e.preventDefault();
     allnav[i - 1].scrollIntoView({ behavior: "smooth" });
   });
+ * 
+ */
 }
+
+// function to control scroll behavior
+
+const link_items = document.querySelectorAll("a");
+
+link_items.forEach((link) => {
+  const current_sec = document.querySelector(link.getAttribute("href"));
+  console.log(current_sec);
+  link.addEventListener("click", function (e) {
+    const section_top = current_sec.offsetTop;
+    console.log(section_top);
+    const myUl = document.querySelector("#navbar__list");
+    const menuHeight = myUl.getBoundingClientRect().height;
+    e.preventDefault();
+    if (window.innerWidth <= 600) {
+      window.scrollTo({ top: current_sec - menuHeight, behavior: "smooth" });
+    } else {
+      link.scrollIntoView({ behavior: "smooth" });
+    }
+  });
+});
 
 // now I created this foreach loop to create which link is active while clicked on it and which is not and used class list to add some style based on the class
 
